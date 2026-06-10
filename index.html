@@ -366,6 +366,12 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:78px 24px
 
 
 @media(max-width:520px){.pf-btn{font-size:9px;padding:7px 10px;letter-spacing:.08em;flex:1;justify-content:center}.podium-filter{gap:5px;flex-wrap:nowrap}.pais-sel{max-width:120px;font-size:15px;padding:0 8px}.c-input2{font-size:16px;padding:14px 12px}}
+/* lang-switcher */
+.lang-switcher{display:flex;align-items:center;border:1px solid var(--border);overflow:hidden;margin-right:4px}
+.lang-btn{background:none;border:none;cursor:pointer;font-family:var(--fd);font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);padding:7px 11px;transition:color .2s;line-height:1}
+.lang-btn.active{color:var(--gold-hi);background:rgba(212,168,75,.07)}
+.lang-btn:hover:not(.active){color:var(--text)}
+.lang-sep{width:1px;height:14px;background:var(--border);flex-shrink:0}
 </style>
 </head>
 <body>
@@ -377,6 +383,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:78px 24px
     <a href="#cadastro" class="nav-tab">Conexões</a>
   </div>
   <div class="nav-actions">
+    <div class="lang-switcher"><button class="lang-btn active" data-lang="pt" onclick="setLang('pt')">PT</button><span class="lang-sep"></span><button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button></div>
     <button class="nav-icon-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></button>
     <div class="nav-avatar-btn">JL</div>
   </div>
@@ -416,7 +423,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:78px 24px
   <div class="container">
     <div class="sec-head sr">
       <p class="eyebrow">As Nações em Disputa</p>
-      <h2 class="h2" style="margin-top:14px">Uma competição <span class="gold">verdadeiramente global</span></h2>
+      <h2 class="h2" style="margin-top:14px" data-i18n-html="nations_h2">Uma competição <span class="gold">verdadeiramente global</span></h2>
       <p class="body">Operações de toda a Europa, Reino Unido, Estados Unidos, Canadá e Austrália competem no mesmo ranking mundial.</p>
     </div>
   </div>
@@ -513,7 +520,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:78px 24px
   <div class="container">
     <div class="sec-head sr">
       <p class="eyebrow">Live Rankings</p>
-      <h2 class="h2" style="margin-top:14px">As <span class="gold">Tr&ecirc;s Disputas</span></h2>
+      <h2 class="h2" style="margin-top:14px" data-i18n-html="rankings_h2">As <span class="gold">Tr&ecirc;s Disputas</span></h2>
       <p class="body">Tr&ecirc;s rankings simult&acirc;neos e independentes. Cada venda da semana impacta os tr&ecirc;s ao mesmo tempo.</p>
     </div>
     <div class="lb-grid">
@@ -1024,6 +1031,174 @@ document.addEventListener('input',e=>{
 });
 // Data do cadastro sempre = hoje
 (function(){const d=document.getElementById('i-data');if(d){d.value=new Date().toISOString().slice(0,10);}})();
+
+// ── i18n PT / EN ─────────────────────────────────────────────────────────────
+(function(){
+'use strict';
+var EN={
+'Impetus World Cup — Temporada 2026':'Impetus World Cup — Season 2026',
+'Temporada 2026 · Members Only':'Season 2026 · Members Only',
+'Conexões':'Connections',
+'24 semanas. Um campeão. Um legado. A maior competição da história do mercado de afiliados.':'24 weeks. One champion. One legacy. The greatest competition in affiliate marketing history.',
+'Garantir minha vaga':'Secure my spot',
+'Ver as regras':'View rules',
+'As Nações em Disputa':'Nations in Competition',
+'Operações de toda a Europa, Reino Unido, Estados Unidos, Canadá e Austrália competem no mesmo ranking mundial.':'Operations across Europe, UK, USA, Canada, and Australia compete on the same global leaderboard.',
+'Alemanha':'Germany','França':'France','Itália':'Italy','Espanha':'Spain',
+'Holanda':'Netherlands','Suécia':'Sweden','Polônia':'Poland',
+'Reino Unido':'United Kingdom','Estados Unidos':'United States',
+'Canadá':'Canada','Austrália':'Australia',
+'A maior competição da história do mercado de afiliados':'The greatest competition in affiliate marketing history',
+'Entregue ao campeão ao fim das 24 semanas':'Delivered to the champion at season end (24 weeks)',
+'+1 relógio de luxo por mês':'+1 luxury watch per month',
+'TAG Heuer e Rolex Wimbledon ao longo de toda a temporada':'TAG Heuer & Rolex Wimbledon throughout the season',
+'Mercados':'Markets',
+'Europa · América · Oceânia':'Europe · Americas · Oceania',
+'Operações de toda a Europa, UK, EUA, Canadá e Austrália. Um ranking global.':'Operations across Europe, UK, USA, Canada & Australia. One global leaderboard.',
+'6 meses de disputa. Cada semana acumula. Cada ponto importa.':'6 months of competition. Each week compounds. Every point matters.',
+'24 Semanas.':'24 Weeks.',
+'Início 11 de Junho.':'Launch June 11.',
+'Semanal':'Weekly','Mensal':'Monthly',
+'Rankings atualizados toda quarta-feira':'Rankings updated every Wednesday',
+'Premiação de luxo para os líderes do mês':'Luxury prizes for monthly leaders',
+'Um campeão. Uma Porsche 911 GTS.':'One champion. One Porsche 911 GTS.',
+'Três rankings simultâneos e independentes. Cada venda da semana impacta os três ao mesmo tempo.':'Three simultaneous independent leaderboards. Each week\'s sales impact all three at once.',
+'Reseta toda semana':'Resets every week',
+'Reseta todo mês':'Resets every month',
+'Acumulativo · Sem resets':'Cumulative · No resets',
+'24 Semanas':'24 Weeks',
+'Premiações':'Prizes',
+'Toda semana.':'Every week.','Todo mês.':'Every month.',
+'Visibilidade no leaderboard, bônus de pontos e momentum competitivo. A semana boa de hoje é a vantagem sazonal de amanhã.':'Leaderboard visibility, point bonuses & competitive momentum. Today\'s strong week builds tomorrow\'s seasonal edge.',
+'Entregue ao campeão absoluto do ranking sazonal ao fim das':'Delivered to the absolute champion of the seasonal leaderboard after',
+'24 semanas':'24 weeks',
+'Relógios de Luxo':'Luxury Watches',
+'todo mês, ao longo de toda a temporada.':'monthly, throughout the entire season.',
+'Sistema de Pontos':'Scoring System',
+'Compete em múltiplos mercados simultaneamente. O ranking global é a soma das suas posições.':'Compete across multiple markets simultaneously. The global leaderboard is the sum of your positions.',
+'Europa':'Europe',
+'1º em vendas (Initial Orders)':'1st in sales (Initial Orders)',
+'2º em vendas':'2nd in sales','3º em vendas':'3rd in sales',
+'Top 5 em vendas':'Top 5 in sales','Top 10 em vendas':'Top 10 in sales',
+'Américas & Oceânia':'Americas & Oceania',
+'Ranking Global':'Global Leaderboard',
+'Penalidade':'Penalty',
+'Multiplicador sazonal para performers consistentes. De +10% por 4 semanas consecutivas sem penalidade até +50% por liderança sustentada ao longo da temporada.':'Seasonal multiplier for consistent performers. From +10% for 4 consecutive penalty-free weeks to +50% for sustained leadership across the season.',
+'Progressão':'Progression',
+'Suba os':'Climb the','Elos.':'Tiers.','Construa seu Status.':'Build Your Status.',
+'Avance pelos elos conforme acumula pontos ao longo da temporada.':'Progress through tiers as you accumulate points across the season.',
+'Consistência':'Consistency','Cria Dominância':'Creates Dominance',
+'Performance composta ao longo do tempo. Quem performa regularmente acumula vantagem que nenhum esforço pontual consegue alcançar.':'Compound performance over time. Consistent performers build advantages no single push can match.',
+'Concorrentes esporádicos ficam para trás rápido.':'Sporadic competitors fall behind fast.',
+'Leaderboard atualizado toda':'Leaderboard updated every',
+'quarta-feira':'Wednesday',
+'. Ciclo semanal: segunda → domingo.':'. Weekly cycle: Monday → Sunday.',
+'O App do Campeonato':'Championship App',
+'O campeonato inteiro':'The entire championship',
+'na palma da sua mão.':'in your palm.',
+'Cada afiliado recebe acesso exclusivo ao app oficial. Acompanhe sua posição nas três corridas, monitore sua progressão de tier e saiba exatamente quantos pontos faltam para o próximo nível.':'Every affiliate gets exclusive access to the official app. Track your position across all three races, monitor tier progression & see exactly how many points to the next level.',
+'3 Rankings ao Vivo':'3 Live Leaderboards',
+'Race to Experience, Race to Watch e Race to Porsche atualizados toda quarta-feira.':'Race to Experience, Race to Watch & Race to Porsche update every Wednesday.',
+'Countdown de Reset':'Reset Countdown',
+'Contador regressivo em tempo real até o fechamento da semana — domingo 23:59 (GMT-3).':'Live countdown to weekly close — Sunday 23:59 (GMT-3).',
+'Mercados Simultâneos':'Simultaneous Markets',
+'Performance separada por Europa e Américas, com seu rank em cada mercado na mesma semana.':'Separate performance for Europe & Americas, with your rank in each market weekly.',
+'Progressão de Tier':'Tier Progression',
+'Barra visual do seu avanço de Bronze a Challenger e os pontos exatos até o próximo nível.':'Visual bar of your Bronze to Challenger climb with exact points to next level.',
+'Notificações Push':'Push Alerts',
+'Alertas de mudança de posição, upgrade de tier, penalidade detectada e reset iminente.':'Position changes, tier upgrades, penalties & reset warnings.',
+'Acesso liberado na semana de início para todos os inscritos · iOS & Android':'Access launches opening week for all registrants · iOS & Android',
+'Dentro do App':'Inside the App',
+'ao Vivo.':'Live.',
+'Acompanhe em tempo real sua posição, seus pontos e a evolução da disputa nas três corridas simultâneas.':'Track your position, points & competition progress across all three races in real time.',
+'Semana 8 · 09–15 Jun 2026':'Week 8 · Jun 09–15 2026',
+'Reseta domingo 23:59 (GMT-3)':'Resets Sunday 23:59 (GMT-3)',
+'Posição':'Position','Operação':'Operation','Pontos':'Points',
+'Junho 2026 · Semanas 5–8':'June 2026 · Weeks 5–8',
+'Reseta no fim do mês':'Resets end of month',
+'Temporada 2026 · Semana 8 de 24':'Season 2026 · Week 8 of 24',
+'* Dados ilustrativos. O leaderboard oficial será atualizado toda quarta-feira via app.':'* Illustrative data. Official leaderboard updates every Wednesday via app.',
+'Início 11.06.2026 · Duração 6 Meses':'Launch 06.11.2026 · Duration 6 Months',
+'24 semanas. Uma corrida. Um campeão.':'24 weeks. One race. One champion.',
+'Consistência separa os contendores dos campeões.':'Consistency separates contenders from champions.',
+'Participante':'Participant','Plataformas & IDs':'Platforms & IDs',
+'Nome Completo do Representante *':'Full Name of Representative *',
+'CNPJ / EIN (Employer Identification Number) *':'CNPJ / EIN (Employer Identification Number) *',
+'E-mail da empresa para acesso ao app (Gmail) *':'Company email for app access (Gmail) *',
+'WhatsApp ou Telegram *':'WhatsApp or Telegram *',
+'Nickname do Afiliado (aparece publicamente no ranking) *':'Affiliate Nickname (appears publicly on leaderboard) *',
+'Data do cadastro':'Registration Date',
+'Continuar →':'Continue →',
+'Informe os IDs das plataformas em que você vai competir.':'Enter IDs for platforms where you\'ll compete.',
+'Pelo menos um é obrigatório.':'At least one is required.',
+'Digistore (Europa)':'Digistore (Europe)','Digistore (EUA)':'Digistore (USA)',
+'BuyGoods (Europa · e-mail)':'BuyGoods (Europe · email)',
+'BuyGoods (EUA · e-mail)':'BuyGoods (USA · email)',
+'JVZoo (Europa)':'JVZoo (Europe)','JVZoo (EUA)':'JVZoo (USA)',
+'← Voltar':'← Back',
+'Ao se inscrever, você concorda com os Termos e Condições oficiais da Impetus World Cup.':'By registering, you agree to the official Impetus World Cup Terms & Conditions.',
+'Inscrição Recebida':'Registration Received',
+'Sua vaga na Impetus World Cup foi registrada! Estamos validando seu cadastro e em breve enviaremos o link de acesso à Impetus World Cup para você.':'Your spot in Impetus World Cup is confirmed! We\'re validating your registration and will send your access link soon.',
+'Regras':'Rules','Pontuação':'Scoring','Cadastro':'Registration',
+'A competição é estritamente meritocrática · Sem sorteios · Sem acaso':'Competition is strictly merit-based · No lotteries · No luck',
+'Brasil +55':'Brazil +55','EUA +1':'USA +1','Canadá +1':'Canada +1',
+'Reino Unido +44':'United Kingdom +44',
+'Alemanha +49':'Germany +49','França +33':'France +33',
+'Itália +39':'Italy +39','Espanha +34':'Spain +34',
+'Holanda +31':'Netherlands +31','Suécia +46':'Sweden +46',
+'Polônia +48':'Poland +48','Austrália +61':'Australia +61',
+};
+var PH_EN={
+'Seu nome completo':'Your full name',
+'CNPJ (14 dígitos) ou EIN (9)':'CNPJ (14 digits) or EIN (9)',
+'DDD + número':'Area code + number',
+'Ex.: Órion':'Ex.: Orion',
+'ID Digistore EU':'Digistore EU ID',
+'ID Digistore US':'Digistore US ID',
+'ID ClickBank':'ClickBank ID',
+'e-mail do BuyGoods EU':'BuyGoods EU email',
+'e-mail do BuyGoods US':'BuyGoods US email',
+'ID JVZoo EU':'JVZoo EU ID',
+'ID JVZoo US':'JVZoo US ID',
+};
+var IHTML={
+nations_h2:{pt:'Uma competição <span class="gold">verdadeiramente global</span>',en:'A <span class="gold">truly global</span> competition'},
+rankings_h2:{pt:'As <span class="gold">Três Disputas</span>',en:'The <span class="gold">Three Races</span>'},
+};
+var _c=null;
+function _save(){
+_c={nodes:[],ph:[],opts:[]};
+var w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,null,false);
+var n;while((n=w.nextNode())){if(n.textContent.trim())_c.nodes.push({n:n,t:n.textContent});}
+document.querySelectorAll('[placeholder]').forEach(function(el){_c.ph.push({el:el,v:el.placeholder});});
+document.querySelectorAll('option').forEach(function(o){_c.opts.push({o:o,t:o.text});});
+}
+window.setLang=function(lang){
+document.querySelectorAll('.lang-btn').forEach(function(b){b.classList.toggle('active',b.dataset.lang===lang);});
+localStorage.setItem('iwc-lang',lang);
+if(lang==='en'){
+if(!_c)_save();
+_c.nodes.forEach(function(r){var k=r.t.trim();if(EN[k]!==undefined)r.n.textContent=r.t.replace(k,EN[k]);});
+_c.ph.forEach(function(r){if(PH_EN[r.v])r.el.placeholder=PH_EN[r.v];});
+_c.opts.forEach(function(r){var k=r.t.trim();if(EN[k])r.o.text=EN[k];});
+document.querySelectorAll('[data-i18n-html]').forEach(function(el){var k=el.dataset.i18nHtml;if(IHTML[k])el.innerHTML=IHTML[k].en;});
+document.title='Impetus World Cup — Season 2026';
+}else{
+if(_c){
+_c.nodes.forEach(function(r){if(r.n.parentNode)r.n.textContent=r.t;});
+_c.ph.forEach(function(r){r.el.placeholder=r.v;});
+_c.opts.forEach(function(r){r.o.text=r.t;});
+document.querySelectorAll('[data-i18n-html]').forEach(function(el){var k=el.dataset.i18nHtml;if(IHTML[k])el.innerHTML=IHTML[k].pt;});
+}
+document.title='Impetus World Cup — Temporada 2026';
+}
+};
+document.addEventListener('DOMContentLoaded',function(){
+var s=localStorage.getItem('iwc-lang');
+document.querySelectorAll('.lang-btn').forEach(function(b){b.classList.toggle('active',b.dataset.lang===(s||'pt'));});
+if(s==='en')window.setLang('en');
+});
+})();
 </script>
 </body>
 </html>
