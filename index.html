@@ -252,7 +252,8 @@ section{padding:clamp(80px,10vw,140px) 24px;position:relative}
 .reg-head p{color:var(--muted);font-size:18px;max-width:480px;margin:0 auto}
 .field{margin-bottom:26px}
 .field label{display:block;font-family:var(--fd);font-size:13px;letter-spacing:.13em;text-transform:uppercase;color:var(--gold);margin-bottom:11px}
-.field input{width:100%;background:var(--bg-2);border:1px solid var(--border);padding:16px 18px;color:var(--text);font-family:var(--fb);font-size:20px;outline:none;transition:border-color .3s}
+.field input{width:100%;max-width:100%;box-sizing:border-box;background:var(--bg-2);border:1px solid var(--border);padding:16px 18px;color:var(--text);font-family:var(--fb);font-size:20px;outline:none;transition:border-color .3s}
+input[type="date"]{-webkit-appearance:none;appearance:none;display:block;width:100%;max-width:100%;min-width:0}
 .field input:focus{border-color:var(--gold)}
 .field input::placeholder{color:var(--dim)}
 .contact-wrap{display:flex}
