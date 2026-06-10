@@ -883,6 +883,11 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:78px 24px
           <label>Data do cadastro</label>
           <input type="date" id="i-data" readonly>
         </div>
+        <div class="field" id="f-indicacao">
+          <label>Indica&ccedil;&atilde;o <span style="color:var(--dim);font-size:11px">(opcional)</span></label>
+          <p style="font-size:13px;color:var(--muted);margin-bottom:8px">Se voc&ecirc; recebeu um convite, escreva o NICKNAME de quem o indicou.</p>
+          <input type="text" id="i-indicacao" placeholder="NICKNAME do indicador">
+        </div>
         <div class="reg-nav">
           <button class="btn" onclick="goStep2()">Continuar &rarr;</button>
         </div>
@@ -1007,7 +1012,8 @@ function submitReg(){
     nickname:document.getElementById('i-nick').value.trim(),
     dataCadastro:document.getElementById('i-data').value,
     digistore_eu:allIds[0],digistore_us:allIds[1],clickbank:allIds[2],
-    buygoods_eu:allIds[3],buygoods_us:allIds[4],jvzoo_eu:allIds[5],jvzoo_us:allIds[6]
+    buygoods_eu:allIds[3],buygoods_us:allIds[4],jvzoo_eu:allIds[5],jvzoo_us:allIds[6],
+    indicacao:document.getElementById('i-indicacao').value.trim()
   };
   btn.disabled=true;btn.textContent=_t('Enviando...','Sending...');
   fetch('https://n8n.grupoimpetus.com/webhook/impetus-worldcup-inscricao',{
@@ -1147,6 +1153,9 @@ var EN={
 'Itália +39':'Italy +39','Espanha +34':'Spain +34',
 'Holanda +31':'Netherlands +31','Suécia +46':'Sweden +46',
 'Polônia +48':'Poland +48','Austrália +61':'Australia +61',
+'Indicação':'Referral',
+'(opcional)':'(optional)',
+'Se você recebeu um convite, escreva o NICKNAME de quem o indicou.':'If you received an invite, write the NICKNAME of who referred you.',
 };
 var PH_EN={
 'Seu nome completo':'Your full name',
@@ -1160,6 +1169,7 @@ var PH_EN={
 'e-mail do BuyGoods US':'BuyGoods US email',
 'ID JVZoo EU':'JVZoo EU ID',
 'ID JVZoo US':'JVZoo US ID',
+'NICKNAME do indicador':'Referral NICKNAME',
 };
 var IHTML={
 nations_h2:{pt:'Uma competição <span class="gold">verdadeiramente global</span>',en:'A <span class="gold">truly global</span> competition'},
