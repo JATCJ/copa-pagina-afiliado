@@ -986,13 +986,13 @@ function backStep1(){
 }
 function submitReg(){
   const allIds=[...document.querySelectorAll('.id-input')].map(i=>i.value.trim());
-  if(allIds.filter(Boolean).length===0){document.getElementById('idErr').textContent='Informe ao menos um ID de plataforma.';document.getElementById('idErr').style.display='block';document.getElementById('idGrid').scrollIntoView({behavior:'smooth',block:'center'});return;}
+  if(allIds.filter(Boolean).length===0){document.getElementById('idErr').textContent=_t('Informe ao menos um ID de plataforma.','Enter at least one platform ID.');document.getElementById('idErr').style.display='block';document.getElementById('idGrid').scrollIntoView({behavior:'smooth',block:'center'});return;}
   document.getElementById('idErr').style.display='none';
   const btn=document.getElementById('btnEnviar');
   // BuyGoods deve ser e-mail válido se preenchido
   const emailRe=/^[^@\s]+@[^@\s]+\.[^@\s]+$/;
   if((allIds[3] && !emailRe.test(allIds[3])) || (allIds[4] && !emailRe.test(allIds[4]))){
-    const e=document.getElementById('idErr');e.textContent='Os campos BuyGoods devem ser e-mails v\u00e1lidos.';e.style.display='block';document.getElementById('idGrid').scrollIntoView({behavior:'smooth',block:'center'});return;
+    const e=document.getElementById('idErr');e.textContent=_t('Os campos BuyGoods devem ser e-mails v\u00e1lidos.','BuyGoods fields must be valid email addresses.');e.style.display='block';document.getElementById('idGrid').scrollIntoView({behavior:'smooth',block:'center'});return;
   }
   const pais=document.getElementById('i-pais').value;
   const contatoRaw=document.getElementById('i-contato').value.trim();
@@ -1009,7 +1009,7 @@ function submitReg(){
     digistore_eu:allIds[0],digistore_us:allIds[1],clickbank:allIds[2],
     buygoods_eu:allIds[3],buygoods_us:allIds[4],jvzoo_eu:allIds[5],jvzoo_us:allIds[6]
   };
-  btn.disabled=true;btn.textContent='Enviando...';
+  btn.disabled=true;btn.textContent=_t('Enviando...','Sending...');
   fetch('https://n8n.grupoimpetus.com/webhook/impetus-worldcup-inscricao',{
     method:'POST',mode:'no-cors',body:new URLSearchParams(payload)
   }).then(()=>{
@@ -1019,7 +1019,7 @@ function submitReg(){
     document.getElementById('regSuccess').scrollIntoView({behavior:'smooth',block:'center'});
   }).catch(()=>{
     btn.disabled=false;btn.textContent='Garantir minha vaga';
-    const e=document.getElementById('idErr');e.textContent='N\u00e3o foi poss\u00edvel enviar agora. Verifique sua conex\u00e3o e tente novamente.';e.style.display='block';
+    const e=document.getElementById('idErr');e.textContent=_t('N\u00e3o foi poss\u00edvel enviar agora. Verifique sua conex\u00e3o e tente novamente.','Could not send now. Check your connection and try again.');e.style.display='block';
   });
 }
 // clear invalid state on input
@@ -1166,6 +1166,7 @@ nations_h2:{pt:'Uma competição <span class="gold">verdadeiramente global</span
 rankings_h2:{pt:'As <span class="gold">Três Disputas</span>',en:'The <span class="gold">Three Races</span>'},
 };
 var _c=null;
+window._t=function(pt,en){return localStorage.getItem('iwc-lang')==='en'?en:pt;};
 function _save(){
 _c={nodes:[],ph:[],opts:[]};
 var w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,null,false);
