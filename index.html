@@ -904,7 +904,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:78px 24px
       <div class="reg-success" id="regSuccess">
         <div class="rs-ic"><svg width="30" height="30" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 15.5l5 5 11-11" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <h3>Inscri&ccedil;&atilde;o Recebida</h3>
-        <p>Sua vaga na Impetus World Cup foi registrada. O acesso ao app ser&aacute; liberado na semana de in&iacute;cio do campeonato.</p>
+        <p>Sua vaga na Impetus World Cup foi registrada! 🏆</p><p>Estamos validando seu cadastro e em breve enviaremos o link de acesso &agrave; Impetus World Cup para voc&ecirc;.</p>
       </div>
 
     </div>
@@ -933,7 +933,7 @@ document.querySelectorAll('.sr').forEach(el=>io.observe(el));
 function switchTab(btn,id){document.querySelectorAll('.app-tab').forEach(b=>b.classList.remove('active'));document.querySelectorAll('[id^="tab-"]').forEach(p=>p.style.display='none');btn.classList.add('active');document.getElementById('tab-'+id).style.display='block';}
 let contatoTipo='WhatsApp';
 const PAISES={BR:{ddi:'+55',min:10,max:11},US:{ddi:'+1',min:10,max:10},CA:{ddi:'+1',min:10,max:10},GB:{ddi:'+44',min:9,max:10},PT:{ddi:'+351',min:9,max:9},DE:{ddi:'+49',min:10,max:11},FR:{ddi:'+33',min:9,max:9},IT:{ddi:'+39',min:9,max:10},ES:{ddi:'+34',min:9,max:9},NL:{ddi:'+31',min:9,max:9},SE:{ddi:'+46',min:7,max:9},PL:{ddi:'+48',min:9,max:9},AU:{ddi:'+61',min:9,max:9}};
-function setC(btn,type){document.querySelectorAll('.c-btn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');contatoTipo=type;const sel=document.getElementById('i-pais'),inp=document.getElementById('i-contato');inp.value='';if(type==='WhatsApp'){sel.classList.remove('hidden');inp.placeholder='DDD + n\u00famero';}else{sel.classList.add('hidden');inp.placeholder='@seuhandle';}document.getElementById('f-contato').classList.remove('invalid');}
+function setC(btn,type){document.querySelectorAll('.c-btn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');contatoTipo=type;const sel=document.getElementById('i-pais'),inp=document.getElementById('i-contato');inp.value='';if(type==='WhatsApp'){sel.classList.remove('hidden');inp.placeholder='DDD + n\u00famero';inp.inputMode='numeric';}else{sel.classList.add('hidden');inp.placeholder='@seuhandle';inp.inputMode='text';}document.getElementById('f-contato').classList.remove('invalid');}
 function paisChange(){const inp=document.getElementById('i-contato');if(contatoTipo==='WhatsApp'){const p=PAISES[document.getElementById('i-pais').value];let d=inp.value.replace(/\D/g,'');if(d.length>p.max)d=d.slice(0,p.max);inp.value=d;}}
 function setStepUI(n){
   document.getElementById('dot1').className='rsd-num '+(n===1?'active':'done');
